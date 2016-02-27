@@ -1,0 +1,26 @@
+ALTER TABLE tbl_files
+ADD FOREIGN KEY (id)
+REFERENCES BY tbl_users(id) ON DELETE NOACTION ON UPDATE NOACTION ;
+
+
+
+ALTER TABLE tbl_files
+ADD FOREIGN KEY (id)
+REFERENCES tbl_users (id) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+ALTER TABLE tbl_users
+ADD FOREIGN KEY (id)
+REFERENCES tbl_files (user_id) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+
+//showing table constraint
+
+
+SHOW CREATE TABLE tbl_register;
+
+SHOW CREATE TABLE file;
+
+
+///recursive permission
+
+sudo chmod -R 777 /var/www/html/hardik/uploads/files/

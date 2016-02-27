@@ -5,15 +5,17 @@
 	if (isset($_POST['update']))
 	{
 		$id = trim($_POST['id']);
-		$std_college = trim($_POST['std_college']);
-		$std_branch = trim($_POST['std_branch']);
-		$std_semester = trim($_POST['std_semester']);
-		$std_subject = trim($_POST['std_subject']);
-		$std_name = trim($_POST['std_name']);
-		$std_mark = trim($_POST['std_mark']);
 		
-		$sql = "update student_records set std_college = ?, std_branch = ?, std_semester = ?, std_subject = ?, std_name = ?, std_mark = ? where id = ?";
-		$param = array($std_college, $std_branch, $std_semester, $std_subject, $std_name, $std_mark, $id);
+		$college_id = trim($_POST['college_id']);
+		$branch_id = trim($_POST['branch_id']);
+		$semester = trim($_POST['semester']);
+		$subject_id = trim($_POST['subject_id']);
+		$student_name = trim($_POST['student_name']);
+		$student_mark = trim($_POST['student_mark']);
+		
+		
+		$sql = "update student_records set college_id = ?, branch_id = ?, semester = ?, subject_id = ?, student_name = ?, student_mark = ? where id = ?";
+		$param = array($college_id, $branch_id, $semester, $subject_id, $student_name, $student_mark, $id);
 		$result = execute_query($sql, $param);
 		
 		if ($result == 1)
@@ -39,7 +41,7 @@
 		$param = array($id);		
 		
 		//fetching data from database
-		$sql = "SELECT std_college, std_branch, std_semester, std_subject, std_name, std_mark FROM student_records where id=? ";
+		$sql = "select id, college_id, branch_id, semester, subject_id, student_name, student_mark from student_records where id=? ";
 		$result = fetch_data($sql, $param);  
 		$length = count($result);
 		if ($length == 0)
@@ -51,7 +53,7 @@
 			foreach ($result as $row)
 			{
 
-	
+					
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
@@ -71,37 +73,37 @@
     	<div>
         	<label>student college name</label>
 			<p> 
-				<input type="text" name="std_college" id="std_college" value="<?php echo $row['std_college']; ?>" />
+				<input type="text" name="college_id" id="college_id" value="<?php echo $college_id[$row['college_id']]; ?>" />
 			</p>
         </div>    
         <div>
         	<label>student branch name</label>
 			<p> 
-				<input type="text" name="std_branch" id="std_branch" value="<?php echo $row['std_branch']; ?>" />
+				<input type="text" name="branch_id" id="branch_id" value="<?php echo $branch_id[$row['branch_id']]; ?>" />
 			</p>
         </div>
         <div>
         	<label>student semester</label>
 			<p> 
-				<input type="text" name="std_semester" id="std_semester" value="<?php echo $row['std_semester']; ?>" />
+				<input type="text" name="semester" id="semester" value="<?php echo $semesters[$row['semester']]; ?>" />
 			</p>
         </div>
         <div>
         	<label>student name</label>
 			<p> 
-				<input type="text" name="std_name" id="std_name" value="<?php echo $row['std_name']; ?>" />
+				<input type="text" name="student_name" id="student_name" value="<?php echo $student_name[$row['student_name']]; ?>" />
 			</p>
         </div>
         <div>
         	<label>subject name</label>
 			<p> 
-				<input type="text" name="std_subject" id="std_subject" value="<?php echo $row['std_subject']; ?>" />
+				<input type="text" name="subject_id" id="subject_id" value="<?php echo $subject_id[$row['subject_id']]; ?>" />
 			</p>
         </div>
         <div>
         	<label>Update mark</label>
 			<p> 
-				<input type="text" name="std_mark" id="std_mark" value="<?php echo $row['std_mark']; }}} ?>" />
+				<input type="text" name="student_mark" id="student_mark" value="<?php echo $row['student_mark']; }}} ?>" />
 			</p>
         </div>
         <div>
@@ -115,57 +117,56 @@
 	<script>
 		$(document).ready(function()
 		{
-			var num = /[0-9]+$/;
-			var valid = /[3]/;
+			var num =/[0-9]/;
 
-			$('form').submit(function()
-			{
-				if ($("#std_college").val() == "")
+			$("form").submit(function(e)
+			{				
+				if ($("#college_id").val() == "")
 				{
-					alert("College name is require field");
-					$("#std_college").focus(); 
+					alert("Please select college from the list");
+					$("#college_id").focus(); 
 					return false;     
 				}        
-				else if ($("#std_branch").val() == "")
+				else if ($("#branch_id").val() == "")
 				{
-					alert("Branch is require field");
-					$("#std_branch").focus(); 
+					alert("Please select branch from the list");
+					$("#branch_id").focus(); 
 					return false;     
 				}        
-				else if ($("#std_semester").val() == "")
+				else if ($("#semester").val() == "")
 				{
-					alert("Please select semester from the list").css("color", "red");
-					$("#std_semester").focus(); 
+					alert("Please select semester from the list");
+					$("#semester").focus(); 
 					return false;     
 				}        
-				else if ($("#std_name").val() == "")
+				else if ($("#student_name").val() == "")
 				{
-					alert("Student name is require field");
-					$("#std_name").focus(); 
+					alert("Please select student from the list");
+					$("#student_name").focus(); 
 					return false;     
 				}        
-				else if ($("#std_subject").val() == "")
+				else if ($("#subject_id").val() == "")
 				{
-					alert("Subject is require field");
-					$("#std_subject").focus(); 
+					alert("Please select subject from the list");
+					$("#subject_id").focus(); 
 					return false;     
 				}        
-				else if ($("#std_mark").val() == "")
+				else if ($("#student_mark").val() == "")
 				{
-					alert("Mark is require field");
-					$("#std_mark").focus(); 
+					alert("Please enter mark");
+					$("#student_mark").focus(); 
 					return false;     
 				}        
-				else if (!$("#std_mark").val().match(num))
+				else if (!$("#student_mark").val().match(num))
 				{
 					alert("Mark should be only positive integer numbers only");
-					$("#std_mark").focus(); 
+					$("#student_mark").focus(); 
 					return false;     
 				}   
-				else if ($("#std_mark").val().length >=3)
+				else if ($("#student_mark").val().length >= 3)
 				{
-					alert("Mark should be less then 100 and valid");
-					$("#std_mark").focusin(); 
+					alert("Mark should be less then 100");
+					$("#student_mark").focus(); 
 					return false;  
 				}
 				else

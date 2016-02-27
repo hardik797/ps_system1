@@ -1,5 +1,6 @@
 <?php
 	include('config/database.php');
+	include('controller/student_data.php');
 	
     //fetching data from database
 	$sql = "select id, college_id, branch_id, semester, subject_id, student_name, student_mark from student_records ";
@@ -39,14 +40,13 @@
 			<tr>
 
             	<td>
-					<a href="controller/edit.php?id=<?=$row['id']?>" onclick="return confirm('are you sure want to edit?');">Edit</a>
 					<a href="controller/delete.php?id=<?=$row['id']?>" onclick="return confirm('are you sure want to delete?');">Delete</a>
                 </td>
-                <td><?php echo $row['student_name']; ?></td>
-				<td><?php echo $row['college_id']; ?></td>
-				<td><?php echo $row['branch_id']; ?></td>
-				<td><?php echo $row['semester']; ?></td>
-				<td><?php echo $row['subject_id']; ?></td>
+                <td><?php echo $student_name[$row['student_name']]; ?></td>
+				<td><?php echo $college_id[$row['college_id']]; ?></td>
+				<td><?php echo $branch_id[$row['branch_id']]; ?></td>
+				<td><?php echo $semesters[$row['semester']]; ?></td>
+				<td><?php echo $subject_id[$row['subject_id']]; ?></td>
 				<td><?php echo $row['student_mark']; ?></td>
 
 			</tr>

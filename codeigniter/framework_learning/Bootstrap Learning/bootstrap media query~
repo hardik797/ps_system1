@@ -1,0 +1,80 @@
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+}
+
+//for testing the media query
+<span class="visible-xs">SIZE XS</span>
+<span class="visible-sm">SIZE SM</span>
+<span class="visible-md">SIZE MD</span>
+<span class="visible-lg">SIZE LG</span>
+
+
+These are the values from Bootstrap3:
+
+/* Extra Small */
+@media(max-width:767px){}
+
+/* Small */
+@media(min-width:768px) and (max-width:991px){}
+
+/* Medium */
+@media(min-width:992px) and (max-width:1199px){}
+
+/* Large */
+@media(min-width:1200px){}
+
+
+//more mrdia query
+
+@screen-xs-max: 767px;
+@screen-sm-min: 768px;
+@screen-sm-max: 991px;
+@screen-md-min: 992px;
+@screen-md-max: 1199px;
+@screen-lg-min: 1200px;
+
+//xs only
+@media(max-width: @screen-xs-max) {
+
+}
+//small and up
+@media(min-width: @screen-sm-min) {
+
+}
+//sm only
+@media(min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+
+}
+//md and up
+@media(min-width: @screen-md-min) {
+
+}
+//md only
+@media(min-width: @screen-md-min) and (max-width: @screen-md-max) {
+
+}
+//lg and up
+@media(min-width: @screen-lg-min) {
+
+}

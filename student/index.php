@@ -4,9 +4,9 @@
 	
 	//for storing errors
 	$er='';
-
 	if (isset($_POST['insert']))
 	{
+		
 		$college_id = trim($_POST['college_id']);
 		$branch_id = trim($_POST['branch_id']);
 		$semester = trim($_POST['semester']);
@@ -46,12 +46,9 @@
             <select name="college_id" id="college_id">
             	<option value="">-select-</option>
                 <?php
-					foreach ($college_id as $key => $clg)
+					foreach ($college_id as $key => $value)
 					{
-						echo $key;
-						echo $clg;
-
-						echo "<option values='".$clg."'>".$key."</option>";	
+						echo '<option value="'.$key.'">'.$value.'</option>';		
 					}
 				?>
             </select>
@@ -61,11 +58,9 @@
             <select name="branch_id" id="branch_id">
             	<option value="">-select-</option>
                 <?php
-					foreach ($branche_id as$key => $branch)
+					foreach ($branch_id as$key => $value)
 					{
-						echo $key;
-						echo $branch;
-						echo "<option values='".$key."'>".$branch."</option>";	
+						echo '<option value="'.$key.'">'.$value.'</option>';	
 					}
 				?>
             </select>
@@ -75,11 +70,9 @@
             <select name="semester" id="semester">
             	<option value="">-select-</option>
                 <?php
-					foreach ($semesters as $key => $sem)
+					foreach ($semesters as $key => $value)
 					{
-						echo $key;
-						echo $sem;
-						echo "<option values='".$key."'>".$sem."</option>";	
+						echo '<option value="'.$key.'">'.$value.'</option>';	
 					}
 				?>
             </select>
@@ -89,11 +82,9 @@
             <select name="student_name" id="student_name">
             	<option value="">-select-</option>
                 <?php
-					foreach ($student_name as $key => $name)
+					foreach ($student_name as $key => $value)
 					{
-						echo $key;
-						echo $name;
-						echo "<option values='".$key."'>".$name."</option>";	
+						echo '<option value="'.$key.'">'.$value.'</option>';	
 					}
 				?>
             </select>
@@ -103,11 +94,9 @@
             <select name="subject_id" id="subject_id">
             	<option value="">-select-</option>
                 <?php
-					foreach ($subject_id as $key => $sub)
+					foreach ($subject_id as $key => $value)
 					{
-						echo $key;
-						echo $sub;
-						echo "<option values='".$key."'>".$sub."</option>";	
+						echo '<option value="'.$key.'">'.$value.'</option>';		
 					}
 				?>
             </select>
@@ -135,52 +124,52 @@
 
 			$("form").submit(function(e)
 			{				
-				if ($("#std_college").val() == "")
+				if ($("#college_id").val() == "")
 				{
 					alert("Please select college from the list");
-					$("#std_college").focus(); 
+					$("#college_id").focus(); 
 					return false;     
 				}        
-				else if ($("#std_branch").val() == "")
+				else if ($("#branch_id").val() == "")
 				{
 					alert("Please select branch from the list");
-					$("#std_branch").focus(); 
+					$("#branch_id").focus(); 
 					return false;     
 				}        
-				else if ($("#std_semester").val() == "")
+				else if ($("#semester").val() == "")
 				{
 					alert("Please select semester from the list");
-					$("#std_semester").focus(); 
+					$("#semester").focus(); 
 					return false;     
 				}        
-				else if ($("#std_name").val() == "")
+				else if ($("#student_name").val() == "")
 				{
 					alert("Please select student from the list");
-					$("#std_name").focus(); 
+					$("#student_name").focus(); 
 					return false;     
 				}        
-				else if ($("#std_subject").val() == "")
+				else if ($("#subject_id").val() == "")
 				{
 					alert("Please select subject from the list");
-					$("#std_subject").focus(); 
+					$("#subject_id").focus(); 
 					return false;     
 				}        
-				else if ($("#std_mark").val() == "")
+				else if ($("#student_mark").val() == "")
 				{
 					alert("Please enter mark");
-					$("#std_mark").focus(); 
+					$("#student_mark").focus(); 
 					return false;     
 				}        
-				else if (!$("#std_mark").val().match(num))
+				else if (!$("#student_mark").val().match(num))
 				{
 					alert("Mark should be only positive integer numbers only");
-					$("#std_mark").focus(); 
+					$("#student_mark").focus(); 
 					return false;     
 				}   
-				else if ($("#std_mark").val().length >= 3)
+				else if ($("#student_mark").val().length >= 3)
 				{
 					alert("Mark should be less then 100");
-					$("#std_mark").focus(); 
+					$("#student_mark").focus(); 
 					return false;  
 				}
 				else
