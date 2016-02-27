@@ -1,0 +1,222 @@
+<?php
+include'con.php';
+$er='';
+if(isset($_POST['submit']))
+{
+	$uname=$_POST['uname'];
+	$mail=$_POST['mail'];
+	$fname=$_POST['fname'];
+	$lname=$_POST['lname'];
+	$add1=$_POST['add1'];
+	$add2=$_POST['add2'];
+	$city=$_POST['city'];
+	$pass=$_POST['pass'];
+
+	$sql=mysql_query("select * from tbl_register where username='$uname' and password='$pass' ");
+	$re=mysql_num_rows($sql);
+	if($re>0)
+	{
+		$er="username or password already in use";
+	}
+	else
+	{
+		$query=mysql_query("insert into tbl_register(username,email,fname,lname,add1,add2,city,password) 
+		values('$uname','$mail','$fname','$lname','$add1','$add2','$city','$pass')") or die(mysql_error());
+		if($query)
+		{
+			header('location:manage_profile.php?un='.$uname);
+		}
+		else
+		{
+			$er="something went wrong!!";
+		}
+	}
+}
+else
+{
+	$er=mysql_error();
+}
+mysql_close($con);
+?>
+
+<html>
+<head>
+<title>Registeration_Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="HTML,CSS,XML,JavaScript,jQuery">
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<script src="js/jquery-1.9.1.js" ></script>
+<script src="js/jquery-2.2.0.min.js" ></script> 
+<script src="js/bootstrap.min.js" ></script>
+<script src="js/bootstrap.js" ></script>
+<style type="text/css">
+label,input[type='label']
+{
+	margin-left:30px;
+	margin-top:10px;
+	width:170px;
+	
+}
+input[type='text']
+{
+	margin-left:5px;
+	width:250px;
+	margin-top:5px;
+	
+}
+input[type='password']
+{
+	margin-left:5px;
+	width:250px;
+	margin-top:5px;
+}
+input[type='submit']
+{
+	margin-left:30px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+input[type='button']
+{
+	margin-left:18px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+#spa{margin-left:2px;
+	
+	color:chocolate;}
+span
+{
+	margin-left:17px;
+	margin-top:2px;
+	color:red;
+}
+body{background-color:burlywood; }
+#d
+{
+
+}
+</style>
+<script type="text/javascript" >
+var username = /^[a-z]|[0-9]/ ;
+var numbers = /^[0-9]*$/ ;
+var charspace= /^[a-zA-Z ]*$/;
+var charnumspace = /^[a-zA-Z\s]*$/;
+var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+$(document).ready(function() 
+{
+	$("form").submit(function() 
+	{
+		var count=0;
+		if($("#uname").val()=="")  
+		{  
+			alert('Username must required');  
+			$("#uname").focus();
+			return false;
+		}  
+		else if(!$("#uname").val().match(username))  
+		{
+			alert('Username must have alphabet characters only');  
+			$("#uname").focus();
+			return false;    
+		}  
+		else if($("#mail").val()=="")  
+		{  
+			alert('Email must required');  
+			$("#mail").focus();
+			return false;  
+		}  
+		else if(!$("#mail").val().match(mail))  
+		{  
+			alert('Email must in proper format');  
+			$("#mail").focus();
+			return false; 
+		}  
+		else if($("#fname").val()=="")  
+		{  
+			alert('Firstname is required');  
+			$("#fname").focus();
+			return false;  
+		}  
+		else if(!$("#fname").val().match(charspace))  
+		{  
+			alert('Only character & Whitespace allowed');  
+			$("#fname").focus();
+			return false;
+		}  
+		else if($("#lname").val()=="")  
+		{  
+			alert('Lastname is required');  
+			$("#lname").focus();
+			return false;  
+		}  
+		else if(!$("#lname").val().match(charspace))  
+		{  
+			alert('Only character & Whitespace allowed');  
+			$("#lname").focus();
+			return false;
+		}  
+		else if($("#add1").val()=="")  
+		{  
+			alert('Address is required');  
+			$("#add1").focus();
+			return false;  
+		}  
+		else if($("#city").val()=="")  
+		{  
+			alert('Your City is required');  
+			$("#city").focus();
+			return false;  
+		}  
+		else if(!$("#city").val().match(charspace))  
+		{  
+			alert('Only character & Whitespace allowed');  
+			$("#city").focus();
+			return false;  
+		}  
+		else if($("#pass").val()=="" && $("#pass").val()<6 )  
+		{  
+			alert('Password Must be 6 character or greater');  
+			$("#pass").focus();
+			return false;  
+		}  
+		else  
+		{  
+			return true;    
+		}     	
+});
+});
+</script>
+</head>
+<body>
+<div id="d">
+<span><?php echo $er; ?></span>
+<form name="form" method="post" id="form" >
+<label >Fill The Require Fields </label><br><br>
+<label >Enter Username :</label>
+<input type="text" name="uname" id="uname" placeholder="Username" /><br>
+<label >Enter Email :</label>
+<input type="text" name="mail" id="mail" placeholder="example@example.com" /> <br>
+<label >Enter FirstName :</label>
+<input type="text" name="fname" id="fname" placeholder="John" /><br>
+<label >Enter LastName :</label>
+<input type="text" name="lname" id="lname" placeholder="Woo" /> <br>
+<label >Enter Addres1 :</label>
+<input type="text" name="add1" id="add1" placeholder="123-xyz street" /><br>
+<label >Enter Addres2 :</label>
+<input  type="text" name="add2" id="add2" placeholder="near xyz road" /> <br>
+<label>Enter City :</label>
+<input type="text" name="city" id="city" placeholder="Newyork" /><br>
+<label >Choose Password :</label>
+<input type="password" name="pass" id="pass" placeholder="Password" /> <br>
+<input type="submit" class="btn btn-success" name="submit" value="Submit" /> &nbsp;
+<input type="button" class="btn btn-danger" name="back" value="Back" onclick="location.href='index.php';" />
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?php
+include'con.php';
+$er='';
+if(isset($_POST['submit']))
+{
+	$uname=$_POST['uname'];
+	$mail=$_POST['mail'];
+	$fname=$_POST['fname'];
+	$lname=$_POST['lname'];
+	$add1=$_POST['add1'];
+	$add2=$_POST['add2'];
+	$city=$_POST['city'];
+	$pass=$_POST['pass'];
+
+	$query=mysql_query("insert into tbl_register(username,email,fname,lname,add1,add2,city,password) 
+				values('$uname','$mail','$fname','$lname','$add1','$add2','$city','$pass')") or die(mysql_error());
+	if($query)
+	{
+		
+		header('location:profile.php?un='.$uname);
+	}
+	else
+	{
+		$er="something went wrong!!";
+	}
+}
+else
+{
+	$er=mysql_error();
+}
+mysql_close($con);
+?>

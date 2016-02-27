@@ -1,0 +1,168 @@
+<?php
+include'con.php';
+$er='';
+if(isset($_POST['submit']))
+{
+	$uname=$_POST['uname'];
+	$pass=$_POST['pass'];
+	$cpass=$_POST['cpass'];
+	if($pass==$cpass)
+	{
+		$query=mysql_query("insert into tbl_admin(username,password) values('$uname','$cpass')") or die(mysql_error());
+				
+		if($query)
+		{		
+			header('location:blank.php');
+		}
+		else
+		{
+			$er="something went wrong!!";
+		}
+	}
+	else
+	{ 
+		$er="password not matched"; 
+	}
+}
+else
+{
+	$er=mysql_error();
+}
+mysql_close($con);
+?>
+
+<html>
+<head>
+<title>Admin_Registeration_Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<meta name="keywords" content="HTML,CSS,XML,JavaScript,jQuery"></meta>
+<style type="text/css">
+label,input[type='label']
+{
+	margin-left:30px;
+	margin-top:10px;
+	width:170px;
+	
+}
+input[type='text']
+{
+	margin-left:5px;
+	width:250px;
+	margin-top:5px;
+	
+}
+input[type='password']
+{
+	margin-left:5px;
+	width:250px;
+	margin-top:5px;
+}
+input[type='submit']
+{
+	margin-left:30px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+input[type='button']
+{
+	margin-left:18px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+#spa{margin-left:2px;
+	
+	color:chocolate;}
+span
+{
+	margin-left:17px;
+	margin-top:2px;
+	color:green;
+}
+body{background-color:burlywood; }
+#d
+{
+
+}
+</style>
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" ></link>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css"></link>
+<script src="js/jquery-1.9.1.js" ></script>
+<script src="js/jquery-1.12.0.min.js" ></script> 
+<script src="js/bootstrap.min.js" ></script>
+<script src="js/bootstrap.js" ></script>
+<script type="text/javascript" >
+var username = /^[a-z]|[0-9]/ ;
+var numbers = /^[0-9]*$/ ;
+var charspace= /^[a-zA-Z ]*$/;
+var charnumspace = /^[a-zA-Z\s]*$/;
+var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+$(document).ready(function() 
+{
+	var count=0;
+	$("form").submit(function() 
+	{
+		if($("#uname").val()=="" )  
+		{  
+			alert('Username must Required');  
+			$("#uname").focus();
+			return false;
+		}
+		else if($("#uname").val()<5 )  
+		{  
+			alert('Username must be at least 5 character');  
+			$("#uname").focus();
+			return false;
+		}    
+		else if(!$("#uname").val().match(username))  
+		{
+			alert('Username must have alphanumeric value only');  
+			$("#uname").focus();
+			return false;    
+		}  
+		else if($("#pass").val()=="" && $("#pass").val()<6)  
+		{  
+			alert('Password Must Required and greater then 6 character');  
+			$("#pass").focus();
+			return false;  
+		}
+		else if($("#cpass").val()=="")  
+		{
+			alert('Confirm your password');  
+			$("#cpass").focus();
+			return false;    
+		}  
+		else if($("#pass").val() != $("#cpass").val())
+		{
+			alert('password mismatch');  
+			$("#cpass").focus();
+			return false;    
+		}
+		else  
+		{  
+			return true;    
+		}     	
+});
+});
+</script>
+</head>
+<body>
+<div id="d">
+<form name="form" method="post" id="form" role="form" >
+<label >Fill The Require Fields </label>&nbsp;<span><?php echo $er; ?></span><br><br>
+<label >Enter Username :</label>
+<input type="text" name="uname" id="uname"  placeholder="username"/><br>
+<label >Enter Password :</label>
+<input type="password" name="pass" id="pass" /> <br>
+<label >Confirm Password :</label>
+<input type="password" name="cpass" id="cpass" /> <br>
+<input type="submit" class="btn btn-success" name="submit" value="Submit" /> &nbsp;
+<input type="button" class="btn btn-danger" name="back" value="Back" onclick="location.href='index.php';" />
+</form>
+</div>
+</body>
+</html>

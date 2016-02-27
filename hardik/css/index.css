@@ -1,0 +1,78 @@
+label
+{
+	width:180px;
+		
+}
+input[type='text']
+{
+    margin-left: -10px;
+	width: 180px;
+		
+}
+input[type='password']
+{
+    margin-left: -10px;
+	width: 180px;
+}
+input[type='submit']
+{
+	height:35px;
+	width:180px;
+}
+input[type='button']
+{
+	height:35px;
+	width:150px;
+}
+#spa
+{
+	margin-left:2px;
+	color:chocolate;
+}
+span
+{
+	margin-left:0px;
+	margin-top:0px;
+	color:green;
+}
+#bd{
+	//for body
+	background-color:#CEECF5;
+	height:auto;
+	width:100%; 			
+}
+#d
+{
+	// for main div tag
+	position:relative;
+	margin-left:430px;
+	margin-top:150px;  
+	background-color:aliceblue;
+	border-color:blueviolet;
+	border-bottom-style:groove;
+	border:5px solid green;  
+	display:block;
+	height:230px;
+	width:400px;
+	padding-left: 30px;
+	padding-top: 30px;;
+}
+#r
+{
+	position:relative;
+	margin-left:400px;
+	margin-top:220px;  
+	background-color:aliceblue;
+	border-color:blueviolet;
+	border-bottom-style:groove;
+	border:4px solid green;  
+	display:block;
+	height:150px;
+	width:250px;
+	padding-top:20px;;
+}
+#forgot
+{
+    margin-left:200px;
+    margin-top: -45px;
+}

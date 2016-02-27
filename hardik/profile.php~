@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Update_Profile</title>
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css" /> 
+<script src="js/bootstrap.min.js" ></script>
+<script language="javascript" type="text/javascript" src="jquery-1.12.0.min.js"></script>
+<style type="text/css">
+input[type='label']
+{
+	margin-left:10px;
+	
+}
+input[type='text']
+{
+	margin-left:100px;
+}
+</style>
+</style>
+</head>
+<body>
+<div class="container" >
+<div class="row">
+<form id="form" name="form" method="post" action="pro_update_db.php" enctype="multipart/form-data"> 
+<br><br>
+<?php
+include'con.php';
+if(isset($_GET['un']))
+{
+	
+$query=mysql_query(" select * from tbl_register where username='$_GET['un']' ");
+while($result=mysql_fetch_array($query))
+{
+?>
+<label>Update Username :</label>
+<input type="text" name="uname" value="<?php echo $result[username]; ?>" /><br>
+<label>Update Email :</label>
+<input type="text" name="mail" value="<?php echo $result[email]; ?>" /> <br>
+<label>Update FirstName :</label>
+<input type="text" name="fname" value="<?php echo $result[fname]; ?>" /><br>
+<label>Update LastName :</label>
+<input type="text" name="lname" value="<?php echo $result[lname]; ?>" /> <br>
+<label>Update Addres1 :</label>
+<input type="text" name="add1" value="<?php echo $result[add1]; ?>" /><br>
+<label>Update Addres2 :</label>
+<input type="text" name="add2" value="<?php echo $result[add2]; ?>" /> <br>
+<label>Update City :</label>
+<input type="text" name="city" value="<?php echo $result[city]; ?>" /><br>
+<label>Choose Profile Image :</label>
+<input type="file" name="img" id="img" /> <br>
+<label>Confirm Password :</label>
+<input type="text" name="cpass"  /> <br>
+<?php } ?>
+
+<input type="submit" class="btn btn-default" name="submit" value="Update" style="margin-left:15px;margin-top:10px;width:115px;" /><br>
+<span><?php if(isset($_GET['er'])){ echo $_GET['er']} else {} ?></span>
+</form>
+</div>
+</div>
+</body>
+</html>

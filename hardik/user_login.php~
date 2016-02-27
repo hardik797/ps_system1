@@ -1,0 +1,36 @@
+<?php
+$con=mysql_connect("localhost","root","");
+mysql_select_db('db_hardik');
+$er='';
+if(isset($_POST['log']))
+{
+
+	$uname=$_POST['uname'];	
+	$pass=md5($_POST['pass']);
+	echo $pass;
+	if(!$con)
+	{
+		$er="Connection Failed!!!";
+	}
+	else
+	{		
+		$query=mysql_query("select * from tbl_register where username='$uname' and password='$pass' ");
+		$result=mysql_num_rows($query);
+		if($result>0) 
+		{
+			header('location:profile.php');
+		}
+		else
+		{
+			header('location:index.php?er=User ID or Password is Wrong');
+		}
+		//}
+	}
+}
+else
+{
+	$er=mysql_error();
+}
+mysql_close($con);
+?>
+

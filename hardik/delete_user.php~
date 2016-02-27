@@ -1,0 +1,19 @@
+<?php
+include'con.php';
+$er='';
+
+	$id=$_GET['id'];
+	
+	$query=mysql_query("delete from tbl_register where id='$id'") or die(mysql_error());
+	if($query)
+	{
+		
+		header('location:users.php?er=Record Deleted');
+	}
+	else
+	{
+		header('location:users.php?er=Someting Wrong');
+	}
+
+mysql_close($con);
+?>

@@ -1,0 +1,29 @@
+label
+{
+	width:180px;
+	margin-left:auto;
+	margin-top:20px;
+	margin-right: 20px;
+	color:green;
+		
+}
+span
+{
+	color:green;
+}
+.b
+{
+	width:180px;
+	margin-left:1097px;
+	margin-top:20px;
+	margin-right: 20px;
+	color:red;
+	font-weight: bolder;
+	font-size: 20px; 
+}
+.right
+{
+	margin-left:1097px;
+	margin-top:20px;
+	
+}

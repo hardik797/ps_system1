@@ -1,0 +1,35 @@
+#lbl
+{
+	margin-left:10px;
+	width:180px;
+	margin-top:2px;
+	
+}
+
+.ps
+{
+	margin-left:10px;
+	width: 200px;
+	margin-top:5px;
+}
+#submit
+{
+	margin-left:10px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+#d
+{
+	position:relative;
+	margin-left:400px;
+	margin-top:150px;  
+	border-bottom-style:groove;
+	border:4px solid green;  
+	display:block;
+	height:300px;
+	width:550px;
+	padding-left: 30px;
+	padding-top: 50px;;
+}
+span{margin-left: 10px;}

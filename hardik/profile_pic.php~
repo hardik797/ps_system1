@@ -1,0 +1,14 @@
+<?php
+$id=$_GET['id'];
+$file="uploads/files/"$id.png;
+$size = getimagesize($file);
+$fp = fopen($file, 'rb');
+header('Content-Type: '.$size['mime']);
+header('Content-Length: '.filesize($file));
+fpassthru($fp);
+exit;
+//header('Content-Type: image/png');
+//imagepng($im);
+//imagedestroy($im);
+?>
+

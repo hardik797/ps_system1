@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<script src="jquery-1.12.1.min.js"></script>	
+	</head>
+	<body>
+		<input type="submit" value="Go" class="go" name="go" rel="1" />
+		<input type="submit" value="Toggle" class="toggle" />
+		<span id="info">
+			<p>
+				<span></span>	
+			</p>
+			<p></p>
+			<p></p>		
+		</span>
+		<div>			
+			<div class="first-div">I am the first div</div>
+			<div id="unit_2">Hi I am unit 2</div>		
+			<div></div>
+			<p>
+				<span id="parent_example"></span>			
+			</p>
+		</div>
+		<script>				
+			$(document).ready(function()
+			{
+				//$("[rel=1]").val();
+				//$("#parent_example").html($(".first-div").html());
+				//$("#parent_example").html($("#parent_example").parent().parent().find("div:first-child").html());
+				//$("#parent_example").html($("#parent_example").siblings().find("div:first-child").html());
+				//$(".go").bind('click', function())
+			/*
+				$(".go").click(function()
+				{
+					$("#info>p:nth-child(1)").html("<strong>Go button has been clicked!</strong>");
+				});				
+				$(".toggle").click(function()
+				{
+					//$("#info>p:first-child").toggle();
+					console.log($("#info>p:first-child").css("display"));
+					if ($("#info>p:first-child").css("display") == 'none')
+					{
+						$("#info>p:first-child").slideDown();
+					}
+					else
+					{
+						$("#info>p:first-child").slideUp();
+					}
+				});*/
+				//console.log($("#unit_2").parent().find('div:first-child').html($("#unit_2").html()));
+				console.log($("#unit_2").siblings('p').html("from my sibling call"));
+			});				
+		</script>	
+	</body>
+</html>

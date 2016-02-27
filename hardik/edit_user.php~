@@ -1,0 +1,405 @@
+<?php
+include'con.php';
+if(isset($_POST['submit']))
+{
+	$id=$_POST['id'];
+	$uname=$_POST['uname'];
+	$mail=$_POST['mail'];
+	$fname=$_POST['fname'];
+	$lname=$_POST['lname'];
+	$add1=$_POST['add1'];
+	$add2=$_POST['add2'];
+	$city=$_POST['city'];
+	$cpass=$_POST['pass'];
+//code for file input type:jpeg,png
+
+$target_dir = "uploads/files/";
+$target_file = $target_dir . basename($_FILES["img"]["name"]);
+// checking & creating directory
+if(!file_exists($target_dir)){
+   mkdir($target_dir,0777);
+}else{ echo "directory exists"; }
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+
+    $check = getimagesize($_FILES["img"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+
+// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+// Check file size
+if ($_FILES["img"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["img"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+ 
+	
+	$query=("select password from tbl_register where id='$id' ");
+	$re=mysql_fetch_array($query);	
+	if($re['password']==$cpass)
+	{
+		$query=mysql_query("update tbl_register set username='$uname',email='$mail',fname='$fname',lname='$lname',add1='$add1',add2='$add2',city='$city' where id='$id' ");
+		if($query && $sql)
+		{
+			$er="Data Updated";
+		}
+		else
+		{
+			$er="something went wrong!!";
+		}
+	}
+}
+mysql_close($con);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="utf-8">
+    <title>Free HTML5 Bootstrap Admin Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+       <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+<style type="text/css">
+label,input[type='label']
+{
+	margin-left:30px;
+	margin-top:10px;
+	width:170px;
+	
+}
+input[type='text']
+{
+	margin-left:5px;
+	width:250px;
+	margin-top:5px;
+	
+}
+input[type='file']
+{
+	margin-left:30px;
+	width:250px;
+	margin-top:5px;
+	
+}
+input[type='password']
+{
+	margin-left:5px;
+	width:250px;
+	margin-top:5px;
+}
+input[type='submit']
+{
+	margin-left:30px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+input[type='button']
+{
+	margin-left:18px;
+	margin-top:5px;
+	height:35px;
+	width:150px;
+}
+#spa{margin-left:2px;
+	
+	color:chocolate;}
+span
+{
+	margin-left:17px;
+	margin-top:2px;
+	color:green;
+}
+
+#d
+{
+	position:relative;
+	border-color:blueviolet;
+	border-bottom-style:groove;
+	border:4px solid green;  
+	padding-left: 30px;
+}
+</style>
+<script src="js/jquery-1.9.1.js" ></script>
+<script src="js/jquery-2.2.0.min.js" ></script> 
+<script type="text/javascript" >
+var username = /^[a-z]|[0-9]/ ;
+var numbers = /^[0-9]*$/ ;
+var charspace= /^[a-zA-Z ]*$/;
+var charnumspace = /^[a-zA-Z\s]*$/;
+var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+$(document).ready(function() 
+{
+	$("form").submit(function() 
+	{
+		var count=0;
+		if($("#uname").val()=="")  
+		{  
+			alert('Username must required');  
+			$("#uname").focus();
+			return false;
+		}  
+		else if(!$("#uname").val().match(username))  
+		{
+			alert('Username must have alphabet characters only');  
+			$("#uname").focus();
+			return false;    
+		}  
+		else if($("#mail").val()=="")  
+		{  
+			alert('Email must required');  
+			$("#mail").focus();
+			return false;  
+		}  
+		else if(!$("#mail").val().match(mail))  
+		{  
+			alert('Email must in proper format');  
+			$("#mail").focus();
+			return false; 
+		}  
+		else if($("#fname").val()=="")  
+		{  
+			alert('Firstname is required');  
+			$("#fname").focus();
+			return false;  
+		}  
+		else if(!$("#fname").val().match(charspace))  
+		{  
+			alert('Only character & Whitespace allowed');  
+			$("#lname").focus();
+			return false;
+		}  
+		else if($("#lname").val()=="")  
+		{  
+			alert('Lastname is required');  
+			$("#lname").focus();
+			return false;  
+		}  
+		else if(!$("#lname").val().match(charspace))  
+		{  
+			alert('Only character & Whitespace allowed');  
+			$("#lname").focus();
+			return false;
+		}  
+		else if($("#add1").val()=="")  
+		{  
+			alert('Address is required');  
+			$("#add1").focus();
+			return false;  
+		}  
+		else if($("#city").val()=="")  
+		{  
+			alert('Your City is required');  
+			$("#city").focus();
+			return false;  
+		}  
+		else if(!$("#city").val().match(charspace))  
+		{  
+			alert('Only character & Whitespace allowed');  
+			$("#city").focus();
+			return false;  
+		}  
+		if($("#pass").val()=="" && $("#pass").val()<6 )  
+		{  
+			alert('Password Must be 6 character or greater');  
+			$("#pass").focus();
+			return false;  
+		}  
+		else  
+		{  
+			return true;    
+		}     	
+});
+});
+</script>
+</head>
+
+<body>
+    <!-- topbar starts -->
+    <div class="navbar navbar-default" role="navigation">
+
+        <div class="navbar-inner">
+            
+            <!-- user dropdown starts -->
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="index.php">Logout</a></li>
+                </ul>
+            </div>
+            <!-- user dropdown ends -->
+
+          
+
+       
+        </div>
+    </div>
+    <!-- topbar ends -->
+<div class="ch-container">
+    <div class="row">
+        
+        <!-- left menu starts -->
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                        <li class="nav-header">Main</li>
+                        <li><a class="ajax-link" href="blank.php"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="users.php"><i class="glyphicon glyphicon-user"></i><span>Manage Users</span></a>
+                        </li>
+                    </ul>
+					</div>
+            </div>
+        </div>
+        <!--/span-->
+        <!-- left menu ends -->
+
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- content starts -->
+    <!-- content ends -->
+    </div><!--/#content.col-md-0-->
+</div><!--/fluid-row-->
+
+    <!-- Ad ends -->
+
+    <hr>
+<?php
+include'con.php';
+$s=$_GET['id'];
+$query=mysql_query(" select * from tbl_register where id='$s' ");
+while($result=mysql_fetch_array($query))
+{
+?>    
+<div id="d">
+<form id="form" name="form" method="post" role="from" enctype="multipart/form-data" > 
+<br><br>
+<input type="hidden" name="id" value="<?php echo $result[id]; ?>" />
+<label>Update Username :</label>
+<input type="text" name="uname" value="<?php echo $result[username]; ?>" /><br>
+<label>Update Email :</label>
+<input type="text" name="mail" value="<?php echo $result[email]; ?>" /> <br>
+<label>Update FirstName :</label>
+<input type="text" name="fname" value="<?php echo $result[fname]; ?>" /><br>
+<label>Update LastName :</label>
+<input type="text" name="lname" value="<?php echo $result[lname]; ?>" /> <br>
+<label>Update Addres1 :</label>
+<input type="text" name="add1" value="<?php echo $result[add1]; ?>" /><br>
+<label>Update Addres2 :</label>
+<input type="text" name="add2" value="<?php echo $result[add2]; ?>" /> <br>
+<label>Update City :</label>
+<input type="text" name="city" value="<?php echo $result[city]; ?>" /><br>
+<label>Choose Profile Image :</label>
+<input type="file" name="img" id="img" /> <br>
+<?php } mysql_close($con); ?>
+
+<input type="submit" class="btn btn-info" name="submit" value="Update" /><br>
+<span><?php echo $er; ?></span>
+</form>
+</div>
+
+
+   
+
+</div><!--/.fluid-container-->
+
+<!-- external javascript -->
+
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- library for cookie management -->
+<script src="js/jquery.cookie.js"></script>
+<!-- calender plugin -->
+<script src='bower_components/moment/min/moment.min.js'></script>
+<script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<!-- data table plugin -->
+<script src='js/jquery.dataTables.min.js'></script>
+
+<!-- select or dropdown enhancer -->
+<script src="bower_components/chosen/chosen.jquery.min.js"></script>
+<!-- plugin for gallery image view -->
+<script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+<!-- notification plugin -->
+<script src="js/jquery.noty.js"></script>
+<!-- library for making tables responsive -->
+<script src="bower_components/responsive-tables/responsive-tables.js"></script>
+<!-- tour plugin -->
+<script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<!-- star rating plugin -->
+<script src="js/jquery.raty.min.js"></script>
+<!-- for iOS style toggle switch -->
+<script src="js/jquery.iphone.toggle.js"></script>
+<!-- autogrowing textarea plugin -->
+<script src="js/jquery.autogrow-textarea.js"></script>
+<!-- multiple file upload plugin -->
+<script src="js/jquery.uploadify-3.1.min.js"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="js/charisma.js"></script>
+
+
+</body>
+</html>

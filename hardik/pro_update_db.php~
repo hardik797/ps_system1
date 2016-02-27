@@ -1,0 +1,80 @@
+<?php
+include'con.php';
+if(isset($_POST['submit']))
+{
+	$id=$_POST['id'];
+	$uname=$_POST['uname'];
+	$mail=$_POST['mail'];
+	$fname=$_POST['fname'];
+	$lname=$_POST['lname'];
+	$add1=$_POST['add1'];
+	$add2=$_POST['add2'];
+	$city=$_POST['city'];
+	$cpass=$_POST['pass'];
+//code for file input type:jpeg,png
+
+$target_dir = "uploads/files/";
+$target_file = $target_dir . basename($_FILES["img"]["name"]);
+// checking & creating directory
+if(!file_exists($target_dir)){
+   mkdir($target_dir,0777,true);
+}else{ echo "directory exists"; }
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+
+    $check = getimagesize($_FILES["img"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+
+// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+// Check file size
+if ($_FILES["img"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["img"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+ 
+	
+	$query=("select password from tbl_register where id='$id' ");
+	$re=mysql_fetch_array($query);	
+	if($re['password']==$cpass)
+	{
+		$query=mysql_query("update tbl_register set username='$uname',email='$mail',fname='$fname',lname='$lname',add1='$add1',add2='$add2',city='$city' where id='$id' ");
+		if($query && $sql)
+		{
+			header("location:users.php?er=Data Updated");
+		}
+		else
+		{
+			header("location:users.php?er=something went wrong!!");
+		}
+	}
+}
+mysql_close($con);
+?>

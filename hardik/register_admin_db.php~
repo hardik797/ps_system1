@@ -1,0 +1,29 @@
+<?php
+include'con.php';
+$er='';
+if(isset($_POST['submit']))
+{
+	$uname=$_POST['uname'];
+	$pass=md5($_POST['pass']);
+	$cpass=md5($_POST['cpass']);
+	if($pass==$cpass)
+	{
+		$query=mysql_query("insert into tbl_admin(username,password) values('$uname','$cpass')") or die(mysql_error());
+				
+	if($query)
+	{		
+		header('location:blank.php?un='.$uname);
+	}
+	else
+	{
+		$er="something went wrong!!";
+	}
+	}
+	else{ $er="password not matched"; }
+}
+else
+{
+	$er=mysql_error();
+}
+mysql_close($con);
+?>
