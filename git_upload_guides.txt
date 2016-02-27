@@ -1,0 +1,80 @@
+first of first install git if its not
+
+now install rabbitvcs using following commands
+
+
+
+	sudo add-apt-repository ppa:rabbitvcs/ppa
+	
+	sudo apt-get update
+
+	sudo apt-get install rabbitvcs-nautilus3	
+
+	sudo apt-get install rabbitvcs-thunar
+	
+	sudo apt-get install rabbitvcs-gedit 
+	
+	sudo apt-get install rabbitvcs-cli 	
+
+	sudo apt-get install python-nautilus python-configobj python-gtk2 python-glade2 python-svn python-dbus python-dulwich subversion meld
+
+
+
+note :- after this done reboot pc once
+
+
+now for git on your pc directory 
+
+
+move to your directory where you want your git repository
+
+
+using cd command
+
+likewise mine is
+
+	
+		cd /var/www/ps_system1
+
+now make clone 
+
+	git clone "your repository url"
+
+	like mine is
+
+	git clone https://github.com/hardik797/ps_system1.git
+
+
+now  initialize git
+
+	git init
+
+now for add all the files of your directory to your repository give this cmd
+
+	git add .
+
+now commit 
+
+	git commit -m "intially uploaded"
+
+now add remote url where u want to add your files
+
+	git remote add origin "your repository url"
+
+	likewise mine is 
+
+	git remote add origin https://github.com/hardik797/ps_system1.git
+
+now verify your remote url is correct else make it correct
+
+	git remote -v
+
+now finally push your files into your repository
+
+	git push origin master
+
+it will ask you for user name and password provide yours and complete !!
+
+	congrats you upload your files into your repository
+
+
