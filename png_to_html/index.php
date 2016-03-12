@@ -18,15 +18,14 @@
 					<li class="gray">THE PROCESS</li>
 				</ul>
 			</div>
-			<span class="clear"></span>
 			<div class="menu">
-			<ul id="menu-ul">
-				<li id="menu-li" class="navy"><a href="#">THINK</a></li>
-				<li id="menu-li" class="green"><a href="#">EAT</a></li>
-				<li id="menu-li" class="orange"><a href="#">MOVE</a></li>
-				<li id="menu-li" ><a href="#">RESOURCES</a></li>
-				<li id="menu-li"><a href="#">SHOP NOW</a></li>
-			</ul>
+				<ul>
+					<li ><a class="navy" href="#">THINK</a></li>
+					<li ><a class="green" href="#">EAT</a></li>
+					<li ><a class="orange" href="#">MOVE</a></li>
+					<li><a href="#">RESOURCES</a></li>
+					<li><a href="#">SHOP NOW</a></li>
+					</ul>
 			</div>
 		</div>
 	</header>

@@ -12,13 +12,13 @@
 body
 {
 	margin: 0px auto;
-	padding: 0px;
+	padding: 0px auto;
 }
 /* header styles */
 #header 
 {
-  background-color: #FFFFFF;
-  height: 85px;
+  background-color: #FFF;
+  height: 70px;
   width: 1302px;
 }
 #logo
@@ -29,48 +29,70 @@ body
 }
 #logo ul li
 {
+  text-decoration: none;
   display:inline-block;
   padding-right: 15px;
   vertical-align: middle;
-
 }
 #logo img
 {
-  height: 40px;
+  height: 55px;
   width: 350px;
   vertical-align: middle;
 
 }
 #process
 {
-  margin-right: -12px;
-  margin-left: -8px;
+  vertical-align: middle;
+  margin-top: 5px;
 }
 #process img
 {
   height: 16px;
-  width: 16px;  
+  width: 16px; 
+  margin-top: 5px;
   vertical-align: middle;
 }
 .menu
 {
-  margin-right: 20px;
+  margin-right: 25px;
   float: right;
   vertical-align: middle;
-  margin-top: 20px;
-
 }
-#menu-ul li a
-{
-   text-decoration: none;
-   color: #000; 
-}
-#menu-li
-{
-  display: inline-block;
-  list-style-type: none;
-  padding: 0 14px 0 0;
+.menu ul
+{   
+   list-style-type: none;
+   list-style: none;
    
+}
+.menu ul li
+{
+   display: inline-block;
+   margin-top: 18.5px;
+ }
+.menu ul li a
+{
+  text-decoration: none;
+  color: #000000;
+  padding: 10px;
+}
+.menu ul li:nth-child(1) a
+{
+  color: #0090E7;
+  font-weight: bolder;
+  font-size: 16px;
+}
+.menu ul li:nth-child(2) a
+{
+  color: #02CA83;
+  font-weight: bolder;
+  font-size: 16px;
+}
+.menu ul li:nth-child(3) a
+{
+  color: #FC6926;
+  font-weight: bolder;
+  font-size: 16px;
 }
 /* container class */
 .container 
@@ -134,9 +156,11 @@ body
 }
 #page h5
 {
-  color: #4d4d4d;
+  color: #000;
   font-weight: bolder; 
+  font-size: ;
   margin-top: -25px;
+  opacity: 0.5;
 }
 #page input[type='text']
 {
@@ -174,21 +198,23 @@ body
   height: 150px;
   width: 1302px;
   padding: 25px 0px 20px 0px;
-  margin: -5px 0 20px 490px;
-  font-family: arial;
-  font-size: 14px;
+  margin: 5px 0 20px 460px;
+  font-family: sans-serif;
+  font-size: 16px;
+  opacity: 0.7;
 }
 #circle
 { 
   height: 350px;
   width: 1302px;
-  padding: 15px 0px 15px 0px;
+  padding: 15px 0px 15px 29px;
   color: #FFFFFF;
   text-align: center;
   font-weight: bolder;
   margin-left: -108px;
   font-size: 20px;
   font-family: arial;
+  opacity: 1;
 }
 #circle-navy
 {
@@ -263,9 +289,10 @@ body
 }
 .think-message h2
 {
-  font-family: sans-serif;
+  font-family: courier;
   color: #FFFFFF;
-  font-size: 22px;
+  font-size: 33px;
+  margin-top: 10px;
 }
 .eat-message
 {
@@ -276,14 +303,16 @@ body
   font-family: arial;
   padding-left: 180px;
   padding-top: 175px;
+  opacity: 1;
 
 }
 .eat-message h2
 {
-  font-family: sans-serif;
+  font-family: courier;
   color: #FFFFFF;
-  font-size: 30px;
+  font-size: 33px;
   margin-top: 5px;
+  opacity: 1;
 
 }
 .eat-circle
@@ -310,50 +339,55 @@ body
 }
 .move-message h2
 {
-  font-family: sans-serif;
+  font-family: courier;
   color: #FFFFFF;
-  font-size: 22px;
+  font-size: 33px;
+  margin-top: 10px;
 }
 .move-message p
 {
   color: #FFFFFF;
-  margin: 8px 0 -10px 0;
+  margin: 8px 0 -10px 5px;
   padding: 15px 0 0 0;
+  font-family: courier;
 }
 .think-message p
 {
   color: #FFFFFF;
-  margin: 8px 0 -10px 0;
+  font-family: courier;
+  margin: 8px 0 -10px 15px;
   padding: 15px 0 0 0;
 }
 .eat-message p
 {
   color: #FFFFFF;
+  font-family: courier;
   margin: -8px 0 -5px 0px;
-  padding: 0 0 0 0;
+  font-weight: bolder;
+  opacity: 1;
 }
 .think-content
 {
   position: absolute;
   float: left;
-  margin-top: -220px; 
-  margin-left: 335px;
+  margin-top: -230px; 
+  margin-left: 310px;
 }
 .think-content img
 {
   height: 7px !important;
-  width: 245px !important;
+  width: 285px !important;
 }
 .move-content
 {
   position: absolute;
-  margin-top: 220px; 
-  margin-left: -130px;
+  margin-top: 215px; 
+  margin-left: -145px;
 }
 .move-content img
 {
   height: 7px !important;
-  width: 245px !important;
+  width: 280px !important;
 }
 #port
 {
@@ -380,9 +414,10 @@ body
 }
 #port h5
 {
-  color: #4d4d4d;
+  color: #000;
   font-weight: bolder; 
   margin-top: -25px;
+  opacity: 0.5;
 }
 #port input[type='text']
 {
@@ -395,10 +430,12 @@ body
 /* color classes */
 .gray
 {
-  color: #352040;
+  color: #000;
+  margin-top: 12px;
   vertical-align: middle;
   font-weight: bolder;
   font-size: 13px;
+  opacity: 0.4;
   font-family: arial;
 }
 
