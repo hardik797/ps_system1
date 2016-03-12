@@ -1,0 +1,499 @@
+body
+{
+	font-family: 'Roboto', sans-serif;
+}
+.container
+{
+	height:auto;
+	width:100%;
+	background-color:#e6e6e6;
+	position: relative;
+	margin-top:-12px; 
+	
+	
+}
+.header
+{
+	height:18%;
+	width:100%;
+	background-color: rgb(2,124,213);
+
+}
+.top-nav
+{
+	color:#ffffff;
+	text-align: center;
+	font-size:13px;
+	padding-top: 1px;
+	margin-left: 200px;
+}
+.top-nav>ul>
+{
+	list-style-type: none;
+	
+}
+.top-nav>ul>li>a
+{
+	text-decoration: none;
+	color:#ffffff;
+}
+.top-nav>ul>li>a:hover
+{
+	color:#ffffff;
+	text-decoration: underline;
+	
+}
+.top-nav>ul>li
+{
+	display: inline;
+	padding-left:5px; 
+
+}
+
+.logo
+{
+	float:left;
+	margin-left:150px; 
+	text-align:center;
+
+}
+input[type="text"]
+{
+	margin-left:20px;
+	width:550px;
+	height:30px;
+	border-radius: 3px;
+}
+input[type="button"]
+{
+	margin-left:-4px;
+	background-color:#fdd922;	
+	border:1px solid #e0bc27;
+	line-height:10px;
+	height:35px;
+	width:100px;
+}
+input[type="submit"]
+{
+	color:#ffffff;
+	background-color:#006cb4;	
+	border:1px solid #0033cc;
+	line-height: 10px;
+	height:35px;
+	width:100px;
+	margin-left:10px;
+}
+.nav
+{	
+	
+	height:30%;
+	width:100%;
+	background-color: #006cb4;
+	overflow:hidden;
+}
+.nav>ul
+{
+	list-style-type: none;
+	display:block;
+	margin-left:150px;
+}
+.nav>ul>li
+{
+	text-align:center;
+	text-transform: uppercase;
+	font-size:12px;
+	display: inline;
+	padding:10px;
+	 
+}
+.nav>ul>li>a
+{
+	text-decoration: none;
+	color:#ffffff;
+}
+.nav>ul>li>a:hover
+{
+	
+	text-decoration: none;
+	color:#000000;
+	background-color:#ffffff;
+	
+}
+
+.section
+{
+	float: left;
+	height:auto;
+	width: 100%;
+	background-color:#0080ff;
+	
+}
+.section-inner
+{
+	float: left;
+	height:auto;
+	width:100%;
+	background-color:linen;
+
+
+}
+.section-nav
+{	float: left;
+	max-height:6%;
+	width: 100%;
+	overflow: hidden;
+	margin-top: -14px;
+}
+.section-nav>ul
+{
+	list-style-type: none;
+	margin-left:125px;
+	margin-right:150px;
+	background-color:#ffffff;
+	color: #666666;
+}
+.section-nav>ul>li
+{
+	display: inline;
+	font-size: 13px;
+}
+.section-nav>ul>li>a
+{
+		text-decoration: none;
+		color: #666666;
+}
+.section-nav>ul>li>a:hover
+{
+		text-decoration: underline;
+		color: #b380ff;
+}
+.section-left
+{	
+	float: left;
+	height: auto;
+	width: 59%;
+	margin-left: 10%;
+	margin-right: 1%;
+	background:transparent;
+}
+
+/* it is for left section banner  */
+/* 
+	height:100px;
+	width:750px; //it is a fix
+	it is height width of banner 
+*/
+.l-banner
+{
+	width:750px;
+	background: transparent;
+	margin-top: 15px;
+	margin-bottom: 10px;
+
+}
+.l-banner2
+{
+	width:750px;
+	box-shadow: 3px 5px 5px #737373;
+
+}
+/* mobile banner css*/
+.product-common-header
+{
+	height: 40px;
+	width: 750px;
+	color: #ffffff;
+	background-color: #464646;
+	margin-bottom: 5px;
+}
+.product-common-header >p
+{
+	padding: 10px;
+}
+
+.mobile-product
+{
+	height:270px;
+}
+.mobile-product-1
+{
+	float: left;
+	width: 200px;
+	color: #000;
+	background-color: #ffffff;
+}
+.mobile-product-2
+{
+	float: left;
+	width: 335px;
+	color: #000;
+	background-color: #ffffff;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.mobile-product-3
+{
+	float: left;
+	width: 200px;
+	color: #000;
+
+	background-color: #ffffff;
+}
+.mobile-product a:hover
+{
+	opacity: 0.3;
+}
+/*
+.mobile-product-1:hover
+{
+	border :1px solid #fdd922;
+}
+.mobile-product-2:hover
+{
+	border :1px solid #fdd922;
+}
+
+.mobile-product-3:hover
+{
+	border :1px solid #fdd922;
+}
+*/
+/*new arrival*/
+.new-arrival
+{
+	
+	height: 300px;
+	width: 730px;
+	padding: 10px;
+	background-color: #fff;
+	margin-bottom: 20px;
+
+}
+.new-arrival-nav
+{
+	float: left;
+	width: 700px;
+	height: 20px;
+	background: transparent;	
+
+}
+.new-arrival-nav ul
+{
+	list-style-type: none;
+	border-bottom: 1px solid #f1f2f4;
+	margin-top: 0px;
+	color:#666666;
+}
+.new-arrival-nav li
+{
+	display: inline;
+	font-size: 14px;
+	padding: 5px;
+	line-height:-35px;
+	color:#666666;
+	
+}
+.new-arrival-nav ul a
+{
+	text-decoration: none;
+	color:#666666;
+
+}
+.new-arrival-nav ul a:hover
+{
+	text-decoration: none;
+	color:#1a53ff;
+
+}
+.new-arrival-inner img
+{
+	width: 150px;
+	height: 150px;
+}
+
+.new-arrival-inner
+{
+	float: left;
+	height:280px;
+	width: 150px;
+	margin: 15px;
+}
+.new-arrival-inner a
+{
+	color:#666666; 
+}
+.new-arrival-inner a:hover
+{
+	color:#330099; 
+}
+.new-arrival-inner :hover
+{
+	opacity: 0.8;
+}
+
+
+.section-right
+{
+	float:left;
+	height: 100%;
+	width: 20%;
+	margin-right: 10%;
+	background:transparent;
+}
+.r-banner, .r-banner2, .r-banner3 
+{
+	margin-top:10px;
+}
+
+.footer
+{
+	height:10%;
+	width: 100%;
+	background-color:#ffffff;
+}
+.footer-inner
+{
+	float: left;
+	height:230px;
+	width: 80%;
+	margin-left: 7%;
+	margin-right: 13%;
+	background:transparent;
+	color: #666666;
+}
+.clear
+{
+	clear: both;
+}
+.f-col-1
+{
+	float: left;
+	height:200px;
+	width:300px;
+	padding-right:10px;
+	background:transparent;
+}
+.footer-inner ul
+{
+	list-style-type: none;
+}
+.footer-inner ul li
+{
+	padding: 5px;
+	border-bottom: 1px solid #666666; 
+}
+.footer-inner h4
+{
+	padding-left:40px; 
+}
+.footer-inner  a
+{
+	text-decoration: none;
+	font-size: 13px;
+	color:#666666; 
+}
+.noline
+{
+	border-bottom: none !important;
+}
+.footer-inner-2
+{
+	float: left;
+	height:auto;
+	width: 80%;
+	margin-top: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+	color: #666666;
+
+}
+.footer-line-block
+{
+	float: left;
+	height:auto;
+	width: 80%;
+	margin-top: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+	color: #666666;
+	border: 1px solid #666666;
+	border-right: none;
+	border-left: none;
+}
+.social-icon
+{
+	float: left;
+	height:40px;
+	width: 80%;
+	margin-top: 30px;
+	margin-left: 10%;
+	margin-right: 10%;
+	color: #666666;
+	border-bottom: 1px solid #666666;
+	
+}
+.copyright
+{
+	float: left;
+}
+.social-icon small
+{
+	margin-bottom: 20px;
+}
+.keep
+{
+	margin-left: 120px;
+}
+.icon 
+{
+	float: left;
+	width: 150px;
+	margin-left: 10px;
+	margin-top:-8px; 
+	margin-bottom: 30px;
+}
+.icon img
+{
+
+	height: 30px;
+	width: 30px;
+
+}
+.social-icon a
+{
+	text-decoration: none;
+	color:#666666; 
+}
+ul
+{
+	list-style-type: none;
+}
+.footer-line-block li
+{
+	display: inline;
+	font-size: 20px;
+	margin-right: 100px;
+}
+.footer-line-block li a
+{
+	text-decoration: none;
+	color: #666666;
+}
+.footer-inner-2 b
+{
+	font-size: 10px;
+	padding-top: 20px;
+}
+.footer-line-block span
+{
+	float: left;
+	margin-left: 5px;
+	margin-right: 120px;
+	vertical-align: middle !important;
+}
+.footer-line-block img
+{
+	float: left;
+	margin-bottom: 5px;
+	vertical-align: 200px !important;
+}

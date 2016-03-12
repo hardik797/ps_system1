@@ -1,0 +1,40 @@
+.bg1
+{
+	min-height: 1100px;
+}
+.registration-form h2
+{
+	padding-bottom: 10px;
+}
+.login-form
+{
+	margin-top: 50px;
+	padding:0px 10px;
+	border:1px solid #999;
+	box-shadow: 2px 5px 5px #999;
+}
+.registration-form
+{
+	
+	padding: 10px;
+	border:1px solid #999;
+	box-shadow: 2px 5px 5px #999;	
+}
+.container-fluid
+{
+	margin-left: 0px;
+}
+.header
+{
+	background-color: #f6f6f6;
+	border-bottom: 1px solid #eeeeee;
+}
+.footer
+{
+	background-color: #f2f2f2;	
+}
+.content
+{
+	background-color: #a9a9a9;
+	min-height: 550px;
+}
