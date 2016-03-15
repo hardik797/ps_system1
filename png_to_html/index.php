@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Fit Identity</title>
-	<meta encoding="utf-8" name="keywords" content="html,css,javascript,jquery" >
+	<meta encoding="utf-8" name="keywords" content="html,css,javascript,jquery">
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<link rel="shortcut icon"  href="img/img6.png">
 
@@ -119,11 +119,89 @@
 			</h3>
 		</div>
 	</div>
+	<!-- banners -->
+	<div class="align">
+		<div class="banner">
+			<div>
+				<img src="img/img4.png">
+			</div>
+			<div>
+				<h1>WHAT IS YOUR FIT IDENTITY?</h1>
+				
+				<p>
+					Millions of people around the world are
+					focused on getting and staying fit to live
+					their healthiest lives.
+				</p>
+				
+				<div>
+					<i>✔
+						<p id="small">
+							Do you ever feel like you just can't achieve-or-maintain-the
+							level of health and fitness you really want?
+						</p>
+					</i>
+					<i>✔
+						<p id="small">
+							Have you followed dozens of eating plans and workout
+							programs, only to find that they don't work as well for you
+							as they do for others?
+						</p>
+					</i>
+				</div>
+				
+				<p>
+					Are you ready to get fit and stay fit?
+				</p>
+				
+				<as>
+					Learn to connect the dots between the three key dimensions of 
+					your health and get in the best shape of your life.
+				</as>
+				
+				<button>
+					GET STARTED
+				</button>
+			</div>
+		</div>		
+	</div>
+	<div class="align">
+		<div class="banner1">
+			<div>
+				<img src="img/img5.png">
+			</div>
+			<div class="banner1-center">
+				<b>MIKE KARPENKO</b>
+			</div>
+			<div id="small-text">
+				<i>
+					"This is a testimonial.Praesent commodo cursus magna,
+					vel scelerisquenisl consectetur et. Maecenas sed diam."
+				</i>
+			</div>
+			<div class="banner1-center-span">
+				<span>-PERSON NAME</span>
+			</div>
+			<div class="banner1-center-p">
+				<p>
+					Mike Karpenko is a transformational fitness coach who has
+					changed the lives of people all over the world. His innovative
+					Fit Identity program is the clumination of decades of
+					leadership in the health and fitness industry.
+				</p>
+			</div>
+			<div class="banner1-center">
+				<button>
+					LEARN MORE
+				</button>
+			</div>
+		</div>
+	</div>
 	<!-- footer -->
 	<div class="align">
 		<footer>
 			<div class="footer">
-				
+			
 			</div>
 		</footer>
 	</div>
