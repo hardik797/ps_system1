@@ -2,6 +2,7 @@
     //including required files
     //maintain session
     include('session.php');
+    include('config.php');
     
     //checking user session available or not
     if (!isset($_SESSION['role']))
@@ -13,13 +14,13 @@
 
 
     //for storing errors
-    $er='';
+    $er = '';
 
     //check whether query string passing any error
     if (isset($_GET['er']))
     { 
         //displaying error message
-        $er=$_GET['er']; 
+        $er = $_GET['er']; 
     } 
 
 /*********************************************************************************************************************|
@@ -39,27 +40,30 @@
         if ( $_GET['action'] == "delete")
         {
             //storing passed id to variable
-            $id=mysql_real_escape_string($_GET['delete_id']);
+            $id = mysql_real_escape_string($_GET['delete_id']);
         
             // checking whether id is not blank
-            if ($id>1) 
+            if ($id > 1) 
             {
 
                 // deleting particular user from user table using id
-                $delete_sql="delete from tbl_users  where id='".$id."' " ;
+                $delete_sql = "delete from tbl_users where id = ? " ;
 
-                $delete_query=mysql_query($delete_sql);
+                $delete_query = execute_query($delete_sql);
+                $param = array($id);
+                $rows = fetch_data($delete_sql,$param,1);
                 
+                $result = count($rows);
                 //checking query is performed or not?
-                if ($delete_query == 1)
+                if ($result == 1)
                 {
                     //store error message 
-                    $er="Record Deleted";
+                    $er = "Record Deleted";
                 }
                 else
                 {   
                     //store error message 
-                    $er="no user found to delete ";
+                    $er = "no user found to delete ";
                 }
 
             //id checker if end here                                                                
@@ -67,7 +71,7 @@
         }
         else
         {
-            $er="no delete action found";
+            $er = "no delete action found";
         }
 
     //main if end here                                              
@@ -84,13 +88,13 @@
 **********************************************************************************************************************/
 
     //geting id for given passed username from database
-    $user_sql="select id,username from tbl_users where id>1 ";
+    $users_sql = "select id,username from tbl_users where id > 1 ";
                         
     //firing query
-    $query=mysql_query($user_sql);            
+    $rows = fetch_data($user_sql,1);            
 
     //checking num rows
-    $check=mysql_num_rows($query);
+    $check = count($rows);
 
     //checking num rows availabel in database
     if ($check == 0)
@@ -101,10 +105,11 @@
     else
     {
 
-        while($row=mysql_fetch_array($query))
+        foreach ($rows as $row => $val) 
         {
             /* image displaying part strat from here*/
-                                                                                                            
+                           
+            echo $row['username'];
             //selecting image path from database for particular user    
             $file_sql=" select filepath 
                             from tbl_files f INNER JOIN tbl_users u 
@@ -112,7 +117,7 @@
 
 
             //fire query
-            $file_query=mysql_query($file_sql);
+            $file_query=fetch_data($file_sql);
 
             //fetching data
             $rows=mysql_fetch_array($file_query);

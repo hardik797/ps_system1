@@ -23,7 +23,7 @@
     else
     {
         //storing passed user into variable
-        $id=mysql_real_escape_string($_GET['id']);
+        $id=trim($_GET['id']);
 
         //validating session
         if ($id != $log_id)

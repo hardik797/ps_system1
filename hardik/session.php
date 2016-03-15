@@ -20,32 +20,29 @@
 
 
     	//retriving session data from database for validation
-        $sql="  select id,username,email 
-                from tbl_users 
-                where id = '".$user_id."' and username = '".$user."' and email = '".$user_mail."' ";
-
+        $sql = "SELECT id,username,email FROM tbl_users where id=? and username=? and email=? ";
+        $param = array($user_id,$user,$user_mail);
+        
         //firing query
-        $query=mysql_query($sql);
-
+        $rows = fetch_data($sql,$param,1);
+        
         //check whether any row available with the given id and password									
-        $res=mysql_num_rows($query);
+        $res=count($rows);
 
-       
+               
         if ($res == 1) 
         {
-
-            //fetching data from database to array
-            $row=mysql_fetch_array($query);
-                    
             //validating session
-            $log_id=$row['id'];            
-            $log_user=$row['username'];
-            $log_mail=$row['email'];
-                  
+            $log_id=$rows[0]['id'];            
+            $log_user=$rows[0]['username'];
+            $log_mail=$rows[0]['email'];
+                
             if (!isset($log_id) && !isset($log_user) && !isset($log_mail))
             {
-                mysql_close($con);
-                session_destroy();
+                $conn="";
+                unset($_SESSION['id']);
+                unset($_SESSION['user']);
+                unset($_SESSION['mail']);
                 header('location:index.php?er=your session expired please login again');
             }
         }

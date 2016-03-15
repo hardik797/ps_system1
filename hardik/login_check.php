@@ -10,7 +10,7 @@
         //fetching posted data and storing it to variable
         if (isset($_POST['uname']) && isset($_POST['password']))
         {
-            $uname=$_POST['uname'];  
+            $uname=trim($_POST['uname']);  
             //generating md5 hash for original passwords            
             $pass=md5($_POST['password']);
         }
@@ -26,34 +26,25 @@
          /* $sql = "insert into tbl_users(username,email,password) values(?,?,?)";
         $param = array($uname,$uname,$pass); */
 
-
         $sql = "SELECT id,username,password,email FROM tbl_users where username=? or email=? and password=?";
         $param = array($uname,$uname,$pass);
-        $rows=fetch_data($sql,$param);
+        $rows = fetch_data($sql,$param,1);
         
-        $num=fetch_data($rows);
-        // //firing query
-        // $query=mysql_query($sql);
-
-        //fetching data
+        //check whether any row available with the given id and password                                    
+        $result=count($rows);     
         
-
-        echo $result;
-        exit;
-
-        //check whether any row available with the given id and password									
-        $row=mysql_fetch_array($query);
-
+       
         //check for num or rows
-        if ($result == 1 ) 
+        if ($result == 1) 
         {            
-
+            
+            
         	//starting session if user found
 			session_start();
-           
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['user'] = $row['username'];
-            $_SESSION['mail'] = $row['email'];
+               
+            $_SESSION['id'] = $rows[0]['id'];
+            $_SESSION['user'] = $rows[0]['username'];
+            $_SESSION['mail'] = $rows[0]['email'];
 
             if ($_SESSION['id'] == 1 && $_SESSION['user'] == 'admin')
             {
