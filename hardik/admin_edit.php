@@ -14,22 +14,22 @@
 
 
     // error variable for storing errors...
-    $er='';
+    $er = '';
     if (isset($_GET['er']))
     {
-        $er=mysql_real_escape_string($_GET['er']);
+        $er = trim($_GET['er']);
     }
 
     //checking if page posted or not?
     if (isset($_POST['update']))
     {
         //storing passed value in to variables
-        $id=mysql_real_escape_string($_POST['id']);
+        $id = trim($_POST['id']);
 
         
         if (isset($_POST['uname']))
         {
-            $uname=mysql_real_escape_string($_POST['uname']);
+            $uname = trim($_POST['uname']);
         }
         else
         {
@@ -38,69 +38,72 @@
         
         if (isset($_POST['mail']))
         {
-            $mail=mysql_real_escape_string($_POST['mail']);    
+            $mail = trim($_POST['mail']);    
         }
         else
         {
-            $er="email address is required field";
+            $er = "email address is required field";
         }
         
         //if all elements are set then its value assigned to variables    
         if (isset($_POST['pass']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['add1']) && isset($_POST['add2']) && isset($_POST['city']))
         {
 
-            $mail=mysql_real_escape_string($_POST['mail']);    
-            $fname=mysql_real_escape_string($_POST['fname']);
-            $lname=mysql_real_escape_string($_POST['lname']);
-            $add1=mysql_real_escape_string($_POST['add1']);
-            $add2=mysql_real_escape_string($_POST['add2']);
-            $city=mysql_real_escape_string($_POST['city'] );
-            $pass=mysql_real_escape_string($_POST['pass']);
+            $mail = trim($_POST['mail']);    
+            $fname = trim($_POST['fname']);
+            $lname = trim($_POST['lname']);
+            $add1 = trim($_POST['add1']);
+            $add2 = trim($_POST['add2']);
+            $city = trim($_POST['city'] );
+            $pass = trim($_POST['pass']);
 
         }
             
         //checking whether password is empty or not?
+		
         $pass = !empty($_POST["pass"]) ? md5($_POST["pass"]) : "";
+		
         if (!empty($pass))
         {
-            $pass = ", password='".$pass."'";
+            $password = $pass;
+			$param = array($uname, $mail, $fname, $lname, $add1, $add2, $city, $password, $id);
         }
           
 
         //updating user details 
-        
-            $update_sql=" update tbl_users 
+
+            $update_sql = " update tbl_users 
                 set 
-                username = '".$uname."', 
-                email = '".$mail."', 
-                fname = '".$fname."', 
-                lname = '".$lname."', 
-                add1 = '".$add1."', 
-                add2 = '".$add2."', 
-                city = '".$city."'".$pass."
-                where id = '".$id."' ";
-     
-        
+                username = ?, 
+                email = ?, 
+                fname = ?, 
+                lname = ?, 
+                add1 = ?, 
+                add2 = ?, 
+                city = ?,
+				password=?
+				where id =? ";
+				
+       
                 
-        $update_query= mysql_query($update_sql);
+				echo "<pre>";
+				print_r($param);
+				//exit;
+				 $param = array($uname, $mail, $fname, $lname, $add1, $add2, $city, $id);
+        		
+				$update_query= execute_query($update_sql);
 
 
         //checking whther query performed?
         if ($update_query == 1)
         {   
-
-
             if (isset($_FILES['img']))
-            {
-                
+            {                
                 // actual path where image may store 
                 $target_dir = "uploads/$uname/";
-
-                $target_file = $target_dir . basename($_FILES["img"]["name"]);
-                
+                $target_file = $target_dir . basename($_FILES["img"]["name"]);                
                 //checking image extention type
-                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-                    
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);                    
                 if (!file_exists($target_dir) ) 
                 {
                     //creating directory 
@@ -109,23 +112,27 @@
                 }
                 
                 //validating and applying file path
-                $img_sql_query=mysql_query("select filepath from tbl_files where filepath='".$target_file."'");
-
-                $img_rows=mysql_num_rows($img_sql_query);
+                $img_sql = "select filepath from tbl_files where filepath=?";
+				$param = array($target_file);
+				$img_sql_query = execute_query($img_sql, $param);
                 //chceking whether image already exists or not
-                if ($img_rows != 0)
+				$result = count($img_sql_query);
+				
+                if ($result != 0)
                 {
-                    $er="image already exists";
+                    $er = "image already exists";
                 }
                 else
                 {                    
 
-                    $file_sql="insert into tbl_files(users_id,filepath) values('".$id."','".$target_file."')";
-                        
+                    $file_sql = "insert into tbl_files(users_id, filepath) values(?, ?) ";
+                    
+					$param = array($id, $target_filepath);
+					
                     // if everything is ok, try to upload file
                     if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) 
                     {
-                        $file_query=mysql_query($file_sql);
+                        $file_query=execute_query($file_sql, $param);
                         //redirecting to user profile page
                         header('location:users.php?er=image and user data has been upldated');
                         exit;
@@ -144,7 +151,7 @@
         }
         else
         {
-            $er="sql have following error :-".mysql_error();
+            $er = "sql have following error :-".mysql_error();
         }
     }
 
@@ -169,24 +176,21 @@
         {
    
            //strring passed value
-           $id=mysql_real_escape_string($_GET['edit_id']);
+           $id = trim($_GET['edit_id']);
             
            //selecting particular user from database
-           $edit_sql="select * from tbl_users where id='".$id."'";
-
-           $edit_query=mysql_query($edit_sql);
+           $edit_sql = "select * from tbl_users where id = ? ";
+			$param = array($id);
+           $edit_query = fetch_rows($edit_sql, $param);
 
 
            //checking num rows
-           $check=mysql_num_rows($edit_query);
+           $check = count($edit_query);
 
            if ($check == 1)
            {   
-                                  
-                //fetching data
-                $result=mysql_fetch_array($edit_query);
-            
-
+				foreach($edit_query as $row)
+				{
 ?>
 
 <!DOCTYPE html>
@@ -231,35 +235,35 @@
 
                         <!-- take id as hidden input for updating particular user data -->
 
-                        <input type="hidden" name="id" value="<?php echo $result['id']; ?>" />
+                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
 
                         <label>Update Username :</label>
 
-                        <input type="text" name="uname" value="<?php echo $result['username']; ?>" id="uname" placeholder="username" /><br>
+                        <input type="text" name="uname" value="<?php echo $row['username']; ?>" id="uname" placeholder="username" /><br>
 
                         <label>Update Email :</label>
 
-                        <input type="text" name="mail" value="<?php echo $result['email']; ?>" id="mail" placeholder="example@example.com" /> <br>
+                        <input type="text" name="mail" value="<?php echo $row['email']; ?>" id="mail" placeholder="example@example.com" /> <br>
 
                         <label>Update FirstName :</label>
 
-                        <input type="text" name="fname" value="<?php echo $result['fname']; ?>" id="fname" placeholder="John" /><br>
+                        <input type="text" name="fname" value="<?php echo $row['fname']; ?>" id="fname" placeholder="John" /><br>
 
                         <label>Update LastName :</label>
 
-                        <input type="text" name="lname" value="<?php echo $result['lname']; ?>" id="lname" placeholder="Woo" /> <br>
+                        <input type="text" name="lname" value="<?php echo $row['lname']; ?>" id="lname" placeholder="Woo" /> <br>
 
                         <label>Update Addres1 :</label>
 
-                        <input type="text" name="add1" value="<?php echo $result['add1']; ?>" id="add1" placeholder="132-xyz street" /><br>
+                        <input type="text" name="add1" value="<?php echo $row['add1']; ?>" id="add1" placeholder="132-xyz street" /><br>
 
                         <label>Update Addres2 :</label>
 
-                        <input type="text" name="add2" value="<?php echo $result['add2']; ?>" id="add2" placeholder="opp.xyz road" /> <br>
+                        <input type="text" name="add2" value="<?php echo $row['add2']; ?>" id="add2" placeholder="opp.xyz road" /> <br>
 
                         <label>Update City :</label>
 
-                        <input type="text" name="city" value="<?php echo $result['city']; ?>" id="city" placeholder="New York" /><br>
+                        <input type="text" name="city" value="<?php echo $row['city']; ?>" id="city" placeholder="New York" /><br>
 
                         <label>Choose Profile Image :</label>
 
@@ -271,7 +275,7 @@
 					   
                         <input type="submit" class="btn btn-success" name="update" value="Update" />&nbsp; 
 
-                        <input type="button" class="btn btn-info" name="back" value="Back" onclick="location.href='users.php';" /><br><br>
+                        <input type="button" class="btn btn-info" name="back" value="Back" onClick="location.href='users.php';" /><br><br>
 
                 </form>
 
@@ -291,8 +295,8 @@
 
     }//main if end here
     
-    //closing conneciton
-    mysql_close($con); 
+	}//closing conneciton
+    $conn = "";
 
 ?>
 <!-- external javascript -->

@@ -1,5 +1,4 @@
 <?php
-
 	//include required files
 	//include('con.php');
     include('login_check.php');
@@ -17,18 +16,15 @@
         $user=$_SESSION['user'];
         $user_mail=$_SESSION['mail'];
         
-
-
     	//retriving session data from database for validation
         $sql = "SELECT id,username,email FROM tbl_users where id=? and username=? and email=? ";
         $param = array($user_id,$user,$user_mail);
         
         //firing query
-        $rows = fetch_data($sql,$param,1);
+        $rows = fetch_rows($sql,$param,1);
         
         //check whether any row available with the given id and password									
         $res=count($rows);
-
                
         if ($res == 1) 
         {
@@ -47,6 +43,4 @@
             }
         }
     }
-
-
 ?>

@@ -1,18 +1,14 @@
 <?php
-
     //including required files
     include('login_check.php');
-
     //for stroing errors
     $er='';
-
     //chcking whether querystring pass any error
     if(isset($_GET['er']))
     {
         //storing error into message
         $er=$_GET['er'];
     }
-
     //maintain session
     if (isset($_SESSION['id']))
     {
@@ -87,15 +83,12 @@
         <script src="js/bootstrap.min.js" ></script>
         <script src="js/bootstrap.js" ></script>
         <script type="text/javascript" >
-
             //validation formating variables
-
             var username = /^[a-z]|[0-9]/ ;
             var numbers = /^[0-9]*$/ ;
             var charspaceonly = /^[a-zA-Z ]*$/;
             var charnumspace = /^[a-zA-Z\s]*$/;
             var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-
             $(document).ready(function() 
             {
                 $("#form").submit(function() 

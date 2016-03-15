@@ -2,7 +2,6 @@
     //including required files
     //maintain session
     include('session.php');
-    include('config.php');
     
     //checking user session available or not
     if (!isset($_SESSION['role']))
@@ -14,13 +13,13 @@
 
 
     //for storing errors
-    $er = '';
+    $er='';
 
     //check whether query string passing any error
     if (isset($_GET['er']))
     { 
         //displaying error message
-        $er = $_GET['er']; 
+        $er=$_GET['er']; 
     } 
 
 /*********************************************************************************************************************|
@@ -40,30 +39,27 @@
         if ( $_GET['action'] == "delete")
         {
             //storing passed id to variable
-            $id = mysql_real_escape_string($_GET['delete_id']);
+            $id = trim($_GET['delete_id']);
         
             // checking whether id is not blank
             if ($id > 1) 
             {
 
                 // deleting particular user from user table using id
-                $delete_sql = "delete from tbl_users where id = ? " ;
-
-                $delete_query = execute_query($delete_sql);
-                $param = array($id);
-                $rows = fetch_data($delete_sql,$param,1);
+                $delete_sql = "delete from tbl_users  where id = ? " ;
+				$param = array($id);
+                $delete_query = execute_query($delete_sql, $param, 2);
                 
-                $result = count($rows);
                 //checking query is performed or not?
-                if ($result == 1)
+                if ($delete_query == 1)
                 {
                     //store error message 
-                    $er = "Record Deleted";
+                    $er="Record Deleted";
                 }
                 else
                 {   
                     //store error message 
-                    $er = "no user found to delete ";
+                    $er="no user found to delete ";
                 }
 
             //id checker if end here                                                                
@@ -71,7 +67,7 @@
         }
         else
         {
-            $er = "no delete action found";
+            $er="no delete action found";
         }
 
     //main if end here                                              
@@ -88,14 +84,16 @@
 **********************************************************************************************************************/
 
     //geting id for given passed username from database
-    $users_sql = "select id,username from tbl_users where id > 1 ";
-                        
+    $user_sql="select id,username from tbl_users where id > ? ";
+
+	$param = array(1);
     //firing query
-    $rows = fetch_data($user_sql,1);            
-
+    $query=fetch_rows($user_sql, $param);    
+	
+	
     //checking num rows
-    $check = count($rows);
-
+    $check=count($query);
+	
     //checking num rows availabel in database
     if ($check == 0)
     {
@@ -105,23 +103,21 @@
     else
     {
 
-        foreach ($rows as $row => $val) 
+        foreach($query as $val)
         {
             /* image displaying part strat from here*/
-                           
-            echo $row['username'];
+                                    
+			$user = $val['username'];
             //selecting image path from database for particular user    
-            $file_sql=" select filepath 
-                            from tbl_files f INNER JOIN tbl_users u 
-                                ON f.users_id=u.id and u.username='".$row['username']."' order by filepath desc ";
+            $file_sql = " select filepath from 
+							tbl_files f, tbl_users u 
+								where f.users_id = u.id and u.username=? order by filepath desc LIMIT 1 ";
 
-
+			$param = array($user);
             //fire query
-            $file_query=fetch_data($file_sql);
-
-            //fetching data
-            $rows=mysql_fetch_array($file_query);
-            
+			
+            $rows = fetch_row($file_sql, $param);
+			
 ?>
 
 <!DOCTYPE html>
@@ -179,7 +175,7 @@
                                                 <td>
                                                 <?php
                                                         //displaying data into datatable
-                                                        echo $row['username'];                                                         
+                                                        echo $user;                                                         
                                                 ?>
                                                 </td>
                                                 
@@ -192,12 +188,12 @@
                                                 
                                                 <td class="center">
                                                         &nbsp;
-                                                        <a class="btn btn-info" href="admin_edit.php?action=edit&edit_id=<?php echo $row['id']; ?>">
+                                                        <a class="btn btn-info" href="admin_edit.php?action=edit&edit_id=<?php echo $val['id']; ?>">
 
                                                             <i class="glyphicon glyphicon-edit icon-white"></i>Edit
                                                         </a>
                                                         &nbsp;
-                                                        <a class="btn btn-danger" onclick="return confirm('are you sure you want to DELETE ?')" href="users.php?action=delete&delete_id=<?php echo $row['id']; ?>">
+                                                        <a class="btn btn-danger" onClick="return confirm('are you sure you want to DELETE ?')" href="users.php?action=delete&delete_id=<?php echo $val['id']; ?>">
 
                                                             <i class="glyphicon glyphicon-trash"></i>Delete</a>
                                                 </td>
@@ -209,7 +205,7 @@
     } //terminating num row else here
     
 //closing database connection
-mysql_close($con);
+$conn = "";
 
 ?>
 
